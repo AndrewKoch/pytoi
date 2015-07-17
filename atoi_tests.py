@@ -18,6 +18,11 @@ class PytoiTests(unittest.TestCase):
         self.assertEquals(pytoi.s_to_i(5, 5))
         self.assertEquals(pytoi.s_to_i(10, 10))
 
+    def type_errors(self):
+        self.logger.info("Testing incompatible data types")
+        with self.assertRaises(TypeError):
+            pytoi.s_to_i([5])
+
 
 def main(args):
     log_fmt = "%(asctime)s %(levelname)s [%(filename)s:%(lineno)d] %(message)s"

@@ -1,14 +1,21 @@
 import argparse
 import logging
+import sys
 
 
 def s_to_i(n):
     logger = logging.getLogger()
     logger.info("Received %s is type %s", n, type(n))
-    if isinstance(n, int):
-        return n
-    else:
-        return int(n)
+    try:
+        if isinstance(n, int):
+            return n
+        else:
+            return int(n)
+    except TypeError:
+        print "Could not convert data to an integer"
+    except:
+        print "Unexpected error:", sys.exc_info()[0]
+        raise
 
 
 def main(args):
@@ -26,7 +33,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--num")
+    parser.add_argument("num")
     parser.add_argument("--debug", action="store_true")
 
     args = parser.parse_args()
