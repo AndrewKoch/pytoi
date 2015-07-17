@@ -3,14 +3,24 @@ import logging
 import sys
 
 
-def s_to_i(n):
+def s_to_i(x):
     logger = logging.getLogger()
-    logger.info("Received %s is type %s", n, type(n))
+    logger.info("Received %s, is type %s", x, type(x))
+
     try:
-        if isinstance(n, int):
-            return n
+        if isinstance(x, int):
+            return x
         else:
-            return int(n)
+            split_num = []
+            for l in x:
+                split_num.append(ord(l) - 48)
+
+            base = 1
+            new_num = 0
+            for i in xrange(len(split_num)):
+                new_num += (split_num.pop() * base)
+                base *= 10
+            return new_num
     except TypeError:
         print "Could not convert data to an integer"
     except:
